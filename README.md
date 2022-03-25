@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>My meetApp Documentation Page</title>
+    <title>My chatApp Documentation Page</title>
   </head>
   <body>
 
@@ -42,21 +42,22 @@ friends and family.</p>
 
 <h3>Tech Stacks</h3>
 <a href="https://reactnative.dev/" target="_blank">React Native</a>
+<br>
 <a href="https://expo.dev/" target="_blank">Expo</a>
+<br>
 <a href="https://firebase.google.com/" target="_blank">Firebase Firestore</a>
 
 <h3>Installations necessary to build this App</h3>
 - Yarn npm install --global yarn<br>
 - Expo npm install expo-cli --global<br>
 
-<h2>Dependencies<h>
+<h2>Dependencies</h3>
 <p>Instruction: In your CLI navigate to the root folder of the project<br>
 - yarn install or npm install.</p>
 
 <p>To launch the app</p>
  - Run expo start or npm start
- <p>Expected Behaviour</p>
-<p>Expo will start the app and a browser tab will open, there you find options<br>
- to execute the app on a device or an emulator</p>
+<p>Expected Behaviou: Expo will start the app and a browser tab will open, there you find options<br>
+to execute the app on a device or an emulator</p>
 </body>
 </html>
