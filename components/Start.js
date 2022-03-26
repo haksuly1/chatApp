@@ -63,6 +63,17 @@ export default class Start extends React.Component {
               <Text style={styles.chooseColor}> Choose Background Color: </Text>
             </View>
 
+              <TextInput
+                accessible={true}
+                accessibilityLabel="Your Name"
+                accessibilityHint="Enter the name you want to use while chatting"
+                style={styles.input}
+                onChangeText={(name) => this.setState({ name })}
+                value={this.state.name}
+                placeholder="Your name"
+              />
+
+            <View style={styles.innerContainer}></View>
             <View style={styles.colorArray}>
               <TouchableOpacity
                 style={styles.color1}
