@@ -1,3 +1,37 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet } from "react-native";
+import "react-native-gesture-handler";
+import Chat from "./components/Chat";
+import Start from "./components/Start";
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Start'>
+        <Stack.Screen
+          name='Start'
+          component={Start}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name='Chat' component={Chat} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+/*
 import { StyleSheet } from 'react-native';
 // importing screens we want to navigate between
 import Start from './components/Start';
@@ -40,6 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/
 
 /*
 //IMPLEMENT BOTTOM TAB
