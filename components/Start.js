@@ -1,102 +1,120 @@
-import React from "react";
-// importing Components from react native
+import React from 'react';
 import {
-  Image,
+  View,
+  Text,
+  StyleSheet,
   ImageBackground,
   Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-// importing images and icons
-import BackgroundImage from "../assets/background-image.png";
-import icon from "../assets/usericon.png";
+} from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import backgroundImg from '../assets/project-assets/bg.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Start extends React.Component {
-  constructor(props) {
-    super(props);
-    // state will be updated with whatever values change for the specific states
-    this.state = { name: "",
-      bgColor: this.colors.blue,
-    };
-  }
+  state = {
+    name: '',
+    bgColor: '#ffffff',
+  };
 
-  // function to update the state with the new background color for Chat Screen chosen by the user
-  changeBgColor = (newColor) => {
+  /*
+   Updates the state with the background color choice of a user 
+   from the colors list
+   */
+  changeBgColor = newColor => {
     this.setState({ bgColor: newColor });
   };
-  // background colors to choose from; will be used to update bgColor state
+  //background color options
   colors = {
-    dark: "#090C08",
-    purple: "#474056",
-    blue: "#8A95A5",
-    green: "#B9C6AE",
+    pink: '#f9d5e5',
+    purple: '#baa6d0',
+    green: '#c4df9b',
+    blue: '#7accc8',
   };
 
   render() {
     return (
-      //Different components do differents things; View acts as a div from html
       <View style={styles.container}>
         <ImageBackground
-          source={BackgroundImage}
-          resizeMode='cover'
-          style={styles.backgroundImage}
+          source={backgroundImg}
+          resizeMode="cover"
+          style={styles.bgImage}
         >
-          <View style={styles.titleBox}>
-            <Text style={styles.title}>ChatApp</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleText}>Chat App</Text>
           </View>
 
-          <View style={styles.box1}>
-            <View style={styles.inputBox}>
-              <Image source={icon} style={styles.image} />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => this.setState({ name: text })}
-                value={this.state.name}
-                placeholder='Your Name'
-              />
-            </View>
-
-            <View style={styles.colorBox}>
-              <Text style={styles.chooseColor}> Choose Background Color: </Text>
-            </View>
-
+          <View style={styles.box}>
+            <View style={styles.inputField}>
+              <Icon style={styles.icon} name="user" size={30} color="#888" />
               <TextInput
                 accessible={true}
                 accessibilityLabel="Your Name"
-                accessibilityHint="Enter the name you want to use while chatting"
-                style={styles.input}
-                onChangeText={(name) => this.setState({ name })}
+                accessibilityHint="Type the name you want to use in the chat session"
+                style={styles.inputText}
+                onChangeText={text => this.setState({ name: text })}
                 value={this.state.name}
-                placeholder="Your name"
+                placeholder="Your Name ..."
               />
+            </View>
 
-            <View style={styles.innerContainer}></View>
-            <View style={styles.colorArray}>
-              <TouchableOpacity
-                style={styles.color1}
-                onPress={() => this.changeBgColor(this.colors.dark)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color2}
-                onPress={() => this.changeBgColor(this.colors.purple)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color3}
-                onPress={() => this.changeBgColor(this.colors.blue)}
-              ></TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color4}
-                onPress={() => this.changeBgColor(this.colors.green)}
-              ></TouchableOpacity>
+            <View style={styles.colorSelector}>
+              <Text style={styles.colorsTitle}>Choose a Background Color</Text>
+
+              <View style={styles.colorsList}>
+                {/* pink background */}
+                <TouchableOpacity
+                  accessible={true}
+                  accessibilityLabel="Select pink background"
+                  accessibilityHint="Choose pink background for the chat screen"
+                  accessibilityRole="button"
+                  onPress={() => this.changeBgColor(this.colors.pink)}
+                >
+                  <View style={styles.pink}></View>
+                </TouchableOpacity>
+
+                {/* Purple background */}
+                <TouchableOpacity
+                  accessible={true}
+                  accessibilityLabel="Select purple background"
+                  accessibilityHint="Choose purple background for the chat screen"
+                  accessibilityRole="button"
+                  onPress={() => this.changeBgColor(this.colors.purple)}
+                >
+                  <View style={styles.purple}></View>
+                </TouchableOpacity>
+
+                {/* GREEN background */}
+                <TouchableOpacity
+                  accessible={true}
+                  accessibilityLabel="Select green background"
+                  accessibilityHint="Choose green background for the chat screen"
+                  accessibilityRole="button"
+                  onPress={() => this.changeBgColor(this.colors.green)}
+                >
+                  <View style={styles.green}></View>
+                </TouchableOpacity>
+
+                {/* BLUE background */}
+                <TouchableOpacity
+                  accessible={true}
+                  accessibilityLabel="Select blue background"
+                  accessibilityHint="Choose blue background for the chat screen"
+                  accessibilityRole="button"
+                  onPress={() => this.changeBgColor(this.colors.blue)}
+                >
+                  <View style={styles.blue}></View>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <Pressable
               style={styles.button}
+              accessible={true}
+              accessibilityLabel="Tab here to Start chatting"
+              accessibilityHint="Enter the chat screen"
+              accessibilityRole="button"
               onPress={() =>
-                this.props.navigation.navigate("Chat", {
+                this.props.navigation.navigate('Chat', {
                   name: this.state.name,
                   bgColor: this.state.bgColor,
                 })
@@ -114,370 +132,123 @@ export default class Start extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
-
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  titleBox: {
-    height: "50%",
-    width: "88%",
-    alignItems: "center",
-    paddingTop: 100,
-  },
-
-  title: {
-    fontSize: 45,
-    fontWeight: "600",
-    color: "#FFFFFF",
-  },
-
-  box1: {
-    backgroundColor: "white",
-    height: "44%",
-    width: "88%",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-
-  inputBox: {
-    borderWidth: 2,
-    borderRadius: 1,
-    borderColor: "grey",
-    width: "88%",
-    height: 60,
-    paddingLeft: 20,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  image: {
-    width: 20,
-    height: 20,
-    marginRight: 10,
-  },
-
-  input: {
-    fontSize: 16,
-    fontWeight: "300",
-    color: "#757083",
-    opacity: 0.5,
-  },
-
-  colorBox: {
-    marginRight: "auto",
-    paddingLeft: 15,
-    width: "88%",
-  },
-
-  chooseColor: {
-    fontSize: 16,
-    fontWeight: "300",
-    color: "#757083",
-    opacity: 1,
-  },
-
-  colorArray: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "88%",
-    paddingRight: 60,
-  },
-
-  color1: {
-    backgroundColor: "#090C08",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-
-  color2: {
-    backgroundColor: "#474056",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-
-  color3: {
-    backgroundColor: "#8A95A5",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-
-  color4: {
-    backgroundColor: "#B9C6AE",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-
-  button: {
-    width: "88%",
-    height: 70,
-    backgroundColor: "#757083",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
-
-
-/*
-import React from 'react';
-// importing Components from react native
-import { StyleSheet, View, Text, TextInput, Pressable, ImageBackground, Image, TouchableOpacity } from 'react-native';
-// importing images and icons
-import BackgroundImage from '../assets/background-image.png';
-import icon from '../assets/usericon.png';
-
-export default class Start extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // state will be updated with whatever values change for the specific states
-    this.state = {
-      name: '',
-      bgColor: this.colors.blue
-    };
-  }
-
-  // function to update the state with the new background color for Chat Screen chosen by the user
-  changeBgColor = (newColor) => {
-    this.setState({ bgColor: newColor });
-  };
-
-  // background colors to choose from; will be used to update bgColor state
-  colors = {
-    dark: '#090C08',
-    purple: '#474056',
-    blue: '#8A95A5',
-    green: '#B9C6AE'
-  };
-
-  render() {
-    return (
-      //Different components do differents things; View acts as a div from html
-      <View style={styles.container}>
-
-        <ImageBackground source={BackgroundImage} resizeMode='cover' style={styles.backgroundImage}>
-
-          <View style={styles.titleBox}>
-            <Text style={styles.title}>ChatApp</Text>
-          </View>
-
-          <View style={styles.box1}>
-            <View style={styles.inputBox}>
-              <Image source={icon} style={styles.image} />
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => this.setState({ name: text })}
-                value={this.state.name}
-                placeholder='Your Name'
-              />
-            </View>
-
-            <View style={styles.colorBox}>
-              <Text style={styles.chooseColor}> Choose Background Color: </Text>
-            </View>
-
-            <View style={styles.colorArray}>
-              <TouchableOpacity
-                style={styles.color1}
-                onPress={() => this.changeBgColor(this.colors.dark)}>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color2}
-                onPress={() => this.changeBgColor(this.colors.purple)}>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color3}
-                onPress={() => this.changeBgColor(this.colors.blue)}>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.color4}
-                onPress={() => this.changeBgColor(this.colors.green)}>
-              </TouchableOpacity>
-            </View>
-
-            <Pressable
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate('Chat', {
-                name: this.state.name,
-                bgColor: this.state.bgColor
-              })}>
-              <Text style={styles.buttonText}>Start Chatting</Text>
-            </Pressable>
-
-          </View>
-
-        </ImageBackground>
-
-      </View>
-    )
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  backgroundImage: {
+  bgImage: {
     flex: 1,
     width: '100%',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-
-  titleBox: {
-    height: '50%',
+  titleContainer: {
+    width: '60%',
+    height: 'auto',
+    alignItems: 'center',
+    marginTop: 60,
+    resizeMode: 'contain',
+    flex: 1,
+  },
+  titleText: {
+    fontSize: 50,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+  box: {
     width: '88%',
-    alignItems: 'center',
-    paddingTop: 100
-  },
-
-  title: {
-    fontSize: 45,
-    fontWeight: "600",
-    color: '#FFFFFF',
-  },
-
-  box1: {
-    backgroundColor: 'white',
     height: '44%',
-    width: '88%',
-    justifyContent: 'space-around',
+    marginBottom: 30,
+    backgroundColor: '#ffffff',
+    flexGrow: 1,
+    flexShrink: 0,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-
+    paddingTop: 30,
+    paddingBottom: 30,
+    borderRadius: 10,
+    height: 260,
+    minHeight: 260,
+    maxHeight: 300,
   },
-
-  inputBox: {
-    borderWidth: 2,
-    borderRadius: 1,
-    borderColor: 'grey',
-    width: '88%',
-    height: 60,
-    paddingLeft: 20,
+  inputField: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'flex-start',
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#000',
+    height: 50,
+    width: '88%',
+    borderRadius: 5,
+    marginBottom: 25,
+    padding: 10,
   },
-
-  image: {
-    width: 20,
-    height: 20,
-    marginRight: 10
+  icon: {
+    //marginLeft: 15,
+    //marginRight: 15,
+    marginRight: 15,
+    height: 25,
+    width: 25,
   },
-
-  input: {
+  inputText: {
     fontSize: 16,
-    fontWeight: "300",
-    color: '#757083',
+    fontWeight: '300',
     opacity: 0.5,
-  },
-
-  colorBox: {
-    marginRight: 'auto',
-    paddingLeft: 15,
-    width: '88%'
-  },
-
-  chooseColor: {
-    fontSize: 16,
-    fontWeight: "300",
     color: '#757083',
-    opacity: 1,
   },
-
-  colorArray: {
+  colorSelector: {
+    flex: 1,
+    width: '70%',
+  },
+  colorsTitle: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '300',
+    color: '#736357',
+    opacity: 1,
+    marginBottom: 10,
+  },
+  colorsList: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '88%',
-    paddingRight: 60
   },
-
-  color1: {
-    backgroundColor: '#090C08',
-    width: 50,
-    height: 50,
-    borderRadius: 25
+  pink: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#f9d5e5',
   },
-
-  color2: {
-    backgroundColor: '#474056',
-    width: 50,
-    height: 50,
-    borderRadius: 25
+  purple: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#baa6d0',
   },
-
-  color3: {
-    backgroundColor: '#8A95A5',
-    width: 50,
-    height: 50,
-    borderRadius: 25
+  green: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#c4df9b',
   },
-
-  color4: {
-    backgroundColor: '#B9C6AE',
-    width: 50,
-    height: 50,
-    borderRadius: 25
+  blue: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#7accc8',
   },
-
   button: {
     width: '88%',
-    height: 70,
-    backgroundColor: '#757083',
-    alignItems: 'center',
-    justifyContent: 'center'
+    height: 60,
+    padding: 15,
+    borderRadius: 5,
+    backgroundColor: '#1e4158',
   },
-
   buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: "600"
-  }
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
 });
-*/
-
-
-/*
-import React from 'react';
-import { View, Text, Button, TextInput, styleSheet } from 'react-native';
-
-export default class Start extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: "" };
-  }
-
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Hello Screen1!</Text>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={(name) => this.setState({ name })}
-          value={this.state.name}
-          placeholder='Type here ...'
-        />
-        <Button
-          title="Go to Chat"
-          onPress={() =>
-            this.props.navigation.navigate('Chat', { name: this.state.name })
-          }
-        />
-      </View>
-    );
-  }
-}
-*/
