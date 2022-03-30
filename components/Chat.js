@@ -7,22 +7,18 @@ import {
   Day,
   InputToolbar,
 } from 'react-native-gifted-chat';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+//import { getAuth, onAuthStateChanged } from "firebase/auth";
+import * as firebase from "firebase";
+import 'firebase/firestore';
 
-//v9 compat packages are API compatible with v8 code
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-
-//import * as firebase from 'firebase';
-//import 'firebase/firestore';
-
-// import AsynceStorage
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import NetInfo
+//import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 
-/*
+//v9 compat packages are API compatible with v8 code
+//import firebase from 'firebase/compat';
+//import 'firebase/compat/auth';
+//import 'firebase/compat/firestore';
+
 // web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAFhmxIht5COEi0wj7DqWWfYGLsHMgw-_A",
@@ -33,7 +29,6 @@ const firebaseConfig = {
   appId: "1:827067780806:web:f1d30475cbbc1097e051c7",
   measurementId: "G-BP9161N37T",
 };
-*/
 
 export default class Chat extends Component {
   constructor() {
@@ -51,22 +46,12 @@ export default class Chat extends Component {
 
     //initializing firebase
     //app = firebase.initializeApp(firebaseConfig)
-    if (firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: "AIzaSyAFhmxIht5COEi0wj7DqWWfYGLsHMgw-_A",
-        authDomain: "chatapp-54327.firebaseapp.com",
-        projectId: "chatapp-54327",
-        storageBucket: "chatapp-54327.appspot.com",
-        messagingSenderId: "827067780806",
-        appId: "1:827067780806:web:f1d30475cbbc1097e051c7",
-        measurementId: "G-BP9161N37T",
-      });
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
     }
     
     // reference to the Firestore messages collection
-    this.referenceChatMessages = firebase
-    .firestore()
-    .collection('messages');
+    this.referenceChatMessages = firebase.firestore().collection('messages');
     this.refMsgsUser = null;
   }
 
@@ -100,7 +85,7 @@ export default class Chat extends Component {
       this.setState({
         messages: JSON.parse(messages),
       });
-    } catch (error) {
+    } catch(error) {
       console.log(error.message);
     }
   };
@@ -112,7 +97,7 @@ export default class Chat extends Component {
         'messages',
         JSON.stringify(this.state.messages)
       );
-    } catch (error) {
+    } catch(error) {
       console.log(error.message);
     }
   };
@@ -124,7 +109,7 @@ export default class Chat extends Component {
       this.setState({
         messages: [],
       });
-    } catch (error) {
+    } catch(error) {
       console.log(error.message);
     }
   };
