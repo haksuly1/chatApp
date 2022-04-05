@@ -17,7 +17,7 @@ const firebaseConfig = {
   measurementId: "G-BP9161N37T"
 };
 
-export class Chat extends Component {
+export default class Chat extends Component {
   constructor() {
     super();
     this.state = {
