@@ -1,5 +1,5 @@
+
 import React, { Component } from 'react';
-/* import { StyleSheet, View, Text, TextInput, Alert, Button } from 'react-native'; */
 // import react native gesture handler
 import 'react-native-gesture-handler';
 //import react navigation
@@ -17,8 +17,8 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Start">
-          <Stack.Screen
-            name="Start"
+          <Stack.Screen 
+            name="Start" 
             component={Start}
             options={{ title: 'Welcome to Chat!' }}
           />
