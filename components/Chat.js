@@ -146,7 +146,7 @@ export default class Chat extends Component {
     });
   }
 
-  addMessage() {
+  addMessages() {
     const message = this.state.messages[0];
     // add a new message to the collection
     this.referenceChatMessages.add({
@@ -231,7 +231,7 @@ export default class Chat extends Component {
           <GiftedChat
             //style={styles.giftedChat}
             renderBubble={this.renderBubble.bind(this)}
-            renderSystemMessage={this.renderSystemMessage.bind(thi)}
+            renderSystemMessage={this.renderSystemMessage.bind(this)}
             renderDay={this.renderDay.bind(this)}
             renderInputToolbar={this.renderInputToolbar.bind(this)}
             messages={this.state.messages}
