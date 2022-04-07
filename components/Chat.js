@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Platform, KeyboardAvoidingView, LogBox } from 'react-native';
 import { Bubble, GiftedChat, SystemMessage, Day, InputToolbar } from 'react-native-gifted-chat';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
@@ -18,6 +18,8 @@ const firebaseConfig = {
   appId: "1:827067780806:web:f1d30475cbbc1097e051c7",
   measurementId: "G-BP9161N37T"
 };
+
+LogBox.ignoreAllLogs();
 
 export default class Chat extends Component {
   constructor() {
@@ -79,14 +81,36 @@ export default class Chat extends Component {
   // save messages on the asyncStorage
   saveMessages = async () => {
     try {
-      await AsyncStorage.setItem( 
-        "messages",
-        JSON.stringify(this.state.messages)
-      );
-    } catch (error) {
-      console.log(error.message);
+      await AsyncStorage.setItem("messages", JSON.stringify(this.state.messages));
+    } catch (err) {
+      console.log(err.message);
     }
   };
+
+
+  // saves user to asyncStorage: necessary to display message bubbles on the correct side while offline
+  async saveUser() {
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(this.state.user));
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+
+  // get user from AsyncStorage
+  async getUser() {
+    let user = '';
+    try {
+      user = await AsyncStorage.getItem('user') || [];
+      this.setState({
+        user: JSON.parse(user)
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
 
   // delete message from asyncStorage
   deleteMessages = async () => {

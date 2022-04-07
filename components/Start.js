@@ -43,7 +43,7 @@ class Start extends Component {
           style={styles.bgImage}
         >
           <View style={styles.titleBox}>
-            <Text style={styles.titleText}>TimeSlip</Text>
+            <Text style={styles.titleText}>chatApp</Text>
           </View>
 
           <View style={styles.mainContent}>

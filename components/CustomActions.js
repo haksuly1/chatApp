@@ -4,7 +4,7 @@ import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
-import firebase from "firebase";
+import * as firebase from "firebase";
 import "firebase/firestore";
 
 // component for user actions (the '+' button) on message composer
@@ -138,11 +138,12 @@ export default class CustomActions extends React.Component {
   render() {
     return (
       <TouchableOpacity
-        accessible={true}
-        accessibilityLabel="More options"
-        accessibilityHint="Let’s you choose to send an image or your geolocation."
-        style={[styles.container]}
+        style={styles.container}
+        activeOpacity={0.8}
         onPress={this.onActionPress}
+        accessbile={true}
+        accessibilityLabel="More options"
+        accessibilityHint="Lets you choose to send an image or your geolocation."
       >
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
           <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
@@ -151,10 +152,6 @@ export default class CustomActions extends React.Component {
     );
   }
 }
-
-CustomActions.contextTypes = {
-  actionSheet: PropTypes.func,
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -177,3 +174,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+CustomActions.contextTypes = {
+  actionSheet: PropTypes.func,
+};
