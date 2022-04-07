@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { Bubble, GiftedChat, SystemMessage, Day, InputToolbar } from 'react-native-gifted-chat';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import NetInfo from '@react-native-community/netinfo';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import NetInfo from "@react-native-community/netinfo";
+import MapView from "react-native-maps";
+import CustomActions from "./CustomActions";
 
 import * as firebase from "firebase";
 import 'firebase/firestore';
@@ -23,7 +25,7 @@ export default class Chat extends Component {
     this.state = {
       messages: [],
       uid: 0,
-      user: { _id: '', name: '', avatar: '' },
+      user: { _id: "", name: "", avatar: "" },
       isConnected: false,
       image: null,
       location: null,
@@ -218,6 +220,33 @@ export default class Chat extends Component {
     this.unsubscribe();
   }
 
+
+  // Returns a mapview when user adds a location to current message
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{ width: 150, height: 100, borderRadius: 13, margin: 3 }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
+  // action button to access communication features via an action sheet
+  renderCustomActions(props) {
+    return <CustomActions {...props} />;
+  }
+
+
+
   render() {
     //let name = this.props.route.params.name;
     //this.props.navigation.setOptions({ title: name });
@@ -225,9 +254,15 @@ export default class Chat extends Component {
     let bgColor = this.props.route.params.bgColor;
 
     return (
-      <View style={styles.container}>
-        <View style={{ ...styles.container, background: bgColor ? bgColor: "FFF"}} >
-            
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: bgColor ? bgColor : "#fff",
+        }}>
+
+        <View style={styles.giftedChat}>
           <GiftedChat
             //style={styles.giftedChat}
             renderBubble={this.renderBubble.bind(this)}
@@ -236,6 +271,8 @@ export default class Chat extends Component {
             renderInputToolbar={this.renderInputToolbar.bind(this)}
             messages={this.state.messages}
             onSend={(messages) => this.onSend(messages)}
+            renderActions={this.renderCustomActions}
+            renderCustomView={this.renderCustomView}
             user={{
               _id: this.state.user._id,
               name: this.state.name,
@@ -247,11 +284,19 @@ export default class Chat extends Component {
       </View>
     )
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  giftedChat: {
+    flex: 1,
+    width: "88%",
+    paddingBottom: 10,
+    justifyContent: "center",
+    borderRadius: 5,
   },
 });
-
