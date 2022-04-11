@@ -36,8 +36,6 @@ export default class Chat extends React.Component {
     super();
     this.state = {
       messages: [],
-      text: message,
-      createdAt: '',
       uid: null,
       user: {
         _id: '',
