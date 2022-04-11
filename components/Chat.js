@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { View, StyleSheet, Platform, KeyboardAvoidingView, LogBox } from 'react-native';
-import { Bubble, GiftedChat, SystemMessage, Day, InputToolbar } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, SystemMessage, Day, InputToolbar, Actions } from 'react-native-gifted-chat';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 import MapView from "react-native-maps";
 import CustomActions from "./CustomActions";
 
 import * as firebase from "firebase";
-import 'firebase/firestore';
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAFhmxIht5COEi0wj7DqWWfYGLsHMgw-_A",
@@ -272,11 +272,36 @@ export default class Chat extends Component {
 
 
   render() {
+    const { bgColor } = this.props.route.params;
+    const { user } = this.state;
     //let name = this.props.route.params.name;
     //this.props.navigation.setOptions({ title: name });
 
-    let bgColor = this.props.route.params.bgColor;
+    //let bgColor = this.props.route.params.bgColor;
 
+    return (
+      <View style={{ flex: 1, backgroundColor: bgColor ? bgColor : '#fff' }}>
+        <GiftedChat
+          renderBubble={this.renderBubble}
+          renderInputToolbar={this.renderInputToolbar.bind(this)}
+          renderDay={this.renderDay}
+          renderActions={this.renderCustomActions}
+          renderCustomView={this.renderCustomView}
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: user._id,
+            name: user.name,
+            avatar: user.avatar
+          }}
+        />
+        {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
+      </View>
+    );
+  }
+}
+
+    /*
     return (
       <View
         style={{
@@ -286,7 +311,7 @@ export default class Chat extends Component {
           backgroundColor: bgColor ? bgColor : "#fff",
         }}>
 
-        <View style={styles.giftedChat}>
+        <View style={{ flex: 1, backgroundColor: bgColor ? bgColor : "#fff" }}>
           <GiftedChat
             //style={styles.giftedChat}
             renderBubble={this.renderBubble.bind(this)}
@@ -324,3 +349,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
+*/
