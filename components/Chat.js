@@ -19,12 +19,13 @@ import NetInfo from '@react-native-community/netinfo';
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAJ6Tb0EjKvR9GQUhyQMyGN6F6AY9XP5Zs",
-  authDomain: "nightorbs-hellochat.firebaseapp.com",
-  projectId: "nightorbs-hellochat",
-  storageBucket: "nightorbs-hellochat.appspot.com",
-  messagingSenderId: "300935556436",
-  appId: "1:300935556436:web:21482ff0bd5b6af3a1ecc1"
+  apiKey: "AIzaSyAFhmxIht5COEi0wj7DqWWfYGLsHMgw-_A",
+  authDomain: "chatapp-54327.firebaseapp.com",
+  projectId: "chatapp-54327",
+  storageBucket: "chatapp-54327.appspot.com",
+  messagingSenderId: "827067780806",
+  appId: "1:827067780806:web:f1d30475cbbc1097e051c7",
+  measurementId: "G-BP9161N37T"
 };
 
 LogBox.ignoreAllLogs();
