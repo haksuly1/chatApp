@@ -28,7 +28,13 @@ const firebaseConfig = {
   measurementId: "G-BP9161N37T"
 };
 
-LogBox.ignoreAllLogs();
+// To remove warning message in the console
+LogBox.ignoreLogs([
+  "Setting a timer",
+  "Warning: ...",
+  "undefined",
+  "Animated.event now requires a second argument for options",
+]);
 
 export default class Chat extends React.Component {
   constructor() {
