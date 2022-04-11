@@ -23,7 +23,7 @@ export default class CustomActions extends React.Component {
         let result = await ImagePicker.launchImageLibraryAsync({
           // only images are allowed
           mediaTypes: ImagePicker.MediaTypeOptions.Images
-        }).catch(err => console.log(err));
+        }).catch(error => console.log(error));
 
         // if the user cancel the process and doesn't pick a file 
         if (!result.cancelled) {
@@ -31,8 +31,8 @@ export default class CustomActions extends React.Component {
           this.props.onSend({ image: imageUrl });
         }
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -44,15 +44,15 @@ export default class CustomActions extends React.Component {
       if (status === 'granted') {
         let result = await ImagePicker.launchCameraAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images
-        }).catch(err => console.log(err));
+        }).catch(error => console.log(error));
 
         if (!result.cancelled) {
           const imageUrl = await this.uploadImage(result.uri);
           this.props.onSend({ image: imageUrl });
         }
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.err(error);
     }
   }
 
@@ -64,7 +64,7 @@ export default class CustomActions extends React.Component {
       if (status === 'granted') {
         // getCurrentPositionAsync reads current location data and returns object with coordinates of location
         let result = await Location.getCurrentPositionAsync({})
-          .catch(err => console.log(err));
+          .catch(error => console.log(erorr));
 
         if (result) {
           // update the state location
