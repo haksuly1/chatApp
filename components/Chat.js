@@ -36,6 +36,8 @@ export default class Chat extends React.Component {
     super();
     this.state = {
       messages: [],
+      text: message,
+      createdAt: '',
       uid: null,
       user: {
         _id: '',
@@ -333,3 +335,14 @@ export default class Chat extends React.Component {
     );
   }
 }
+
+/*
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+*/
