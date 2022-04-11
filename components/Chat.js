@@ -310,7 +310,7 @@ export default class Chat extends React.Component {
 
   render() {
     const { bgColor } = this.props.route.params;
-    const { user } = this.state;
+    //const { user } = this.state;
 
     return (
       <View style={{ flex: 1, backgroundColor: bgColor ? bgColor : '#fff' }}>
@@ -323,9 +323,9 @@ export default class Chat extends React.Component {
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={{
-            _id: user._id,
-            name: user.name,
-            avatar: user.avatar
+            _id: this.state.user._id,
+            name: this.state.user.name,
+            avatar: this.state.user.avatar
           }}
         />
         {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}

@@ -52,7 +52,7 @@ export default class CustomActions extends React.Component {
         }
       }
     } catch (error) {
-      console.err(error);
+      console.error(error);
     }
   }
 

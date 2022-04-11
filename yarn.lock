@@ -3726,9 +3726,9 @@ expo-status-bar@~1.2.0:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.2.0.tgz"
   integrity sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ==
 
-expo@~44.0.0:
+expo@^44.0.6:
   version "44.0.6"
-  resolved "https://registry.npmjs.org/expo/-/expo-44.0.6.tgz"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-44.0.6.tgz#5454f08abb07166e55eb55b5fc4d45b5ad416ff4"
   integrity sha512-iHnra6uD5kXZgdSUrvxZ3sLjg1FtgtA4p4uaSKVQ39IaMHJBngo8RKqFUJ+BF2kPDpBLJ251eLlhgYUlnAyuag==
   dependencies:
     "@babel/runtime" "^7.14.0"
@@ -4794,6 +4794,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+location@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/location/-/location-0.0.1.tgz#fa071d21365dd76661e2271ade8ca1314dc6f580"
+  integrity sha1-+gcdITZd12Zh4ica3oyhMU3G9YA=
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
