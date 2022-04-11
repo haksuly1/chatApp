@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-//import * as Permissions from "expo-permissions";
+import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
