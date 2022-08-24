@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
+import MapView from 'react-native-maps';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
