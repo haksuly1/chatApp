@@ -23,10 +23,10 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Start">
-          <Stack.Screen 
-            name="Start" 
+          <Stack.Screen
+            name="Start"
             component={Start}
-            options={{ title: 'Welcome to Chat!' }}
+            options={{ title: "Welcome to Chat" }}
           />
           <Stack.Screen name="Chat" component={Chat} />
         </Stack.Navigator>
